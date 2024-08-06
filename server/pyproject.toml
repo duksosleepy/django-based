@@ -1,0 +1,15 @@
+[project]
+name = "server"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "Song Khoi", email = "songkhoi123@gmail.com" }
+]
+dependencies = []
+readme = "README.md"
+requires-python = ">= 3.12"
+
+[tool.rye]
+managed = true
+virtual = true
+dev-dependencies = []
