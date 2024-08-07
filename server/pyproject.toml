@@ -2,14 +2,28 @@
 name = "server"
 version = "0.1.0"
 description = "Add your description here"
-authors = [
-    { name = "Song Khoi", email = "songkhoi123@gmail.com" }
-]
-dependencies = []
+authors = [{ name = "Song Khoi", email = "songkhoi123@gmail.com" }]
 readme = "README.md"
+keywords = ["django", "tailwindcss", "htmx", "alpinejs"]
+license = { text = "MIT" }
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Utilities",
+    "Framework :: Django :: 5.1",
+]
+dependencies = ["django>=5.0.7"]
 requires-python = ">= 3.12"
 
 [tool.rye]
 managed = true
 virtual = true
-dev-dependencies = []
+dev-dependencies = ["pytest>=8.3.2", "pre-commit>=3.8.0", "ruff>=0.5.6"]
