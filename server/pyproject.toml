@@ -3,7 +3,6 @@ name = "server"
 version = "0.1.0"
 description = "Add your description here"
 authors = [{ name = "Song Khoi", email = "songkhoi123@gmail.com" }]
-readme = "README.md"
 keywords = ["django", "tailwindcss", "htmx", "alpinejs"]
 license = { text = "MIT" }
 classifiers = [
@@ -20,10 +19,27 @@ classifiers = [
     "Topic :: Utilities",
     "Framework :: Django :: 5.1",
 ]
-dependencies = ["django>=5.0.7"]
+dependencies = [
+    "django-allauth>=64.0.0",
+    "django-crispy-forms>=2.3",
+    "django-debug-toolbar>=4.4.6",
+    "whitenoise>=6.7.0",
+    "psycopg2-binary>=2.9.9",
+    "crispy-bootstrap5>=2024.2",
+    "django>=5.1",
+    "django-tailwind>=3.8.0",
+    "django-browser-reload>=1.13.0",
+    "python-dotenv>=1.0.1",
+]
+readme = "README.md"
 requires-python = ">= 3.12"
 
 [tool.rye]
 managed = true
 virtual = true
-dev-dependencies = ["pytest>=8.3.2", "pre-commit>=3.8.0", "ruff>=0.5.6"]
+dev-dependencies = [
+    "pytest>=8.3.2",
+    "pre-commit>=3.8.0",
+    "ruff>=0.5.6",
+    "cookiecutter>=2.6.0",
+]

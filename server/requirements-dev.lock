@@ -9,21 +9,59 @@
 #   generate-hashes: false
 #   universal: false
 
+arrow==1.3.0
+    # via cookiecutter
 asgiref==3.8.1
     # via django
+    # via django-browser-reload
+binaryornot==0.4.4
+    # via cookiecutter
+certifi==2024.7.4
+    # via requests
 cfgv==3.4.0
     # via pre-commit
+chardet==5.2.0
+    # via binaryornot
+charset-normalizer==3.3.2
+    # via requests
+click==8.1.7
+    # via cookiecutter
 colorama==0.4.6
+    # via click
     # via pytest
+cookiecutter==2.6.0
+crispy-bootstrap5==2024.2
 distlib==0.3.8
     # via virtualenv
-django==5.0.7
+django==5.1
+    # via crispy-bootstrap5
+    # via django-allauth
+    # via django-browser-reload
+    # via django-crispy-forms
+    # via django-debug-toolbar
+    # via django-tailwind
+django-allauth==64.0.0
+django-browser-reload==1.13.0
+django-crispy-forms==2.3
+    # via crispy-bootstrap5
+django-debug-toolbar==4.4.6
+django-tailwind==3.8.0
 filelock==3.15.4
     # via virtualenv
 identify==2.6.0
     # via pre-commit
+idna==3.7
+    # via requests
 iniconfig==2.0.0
     # via pytest
+jinja2==3.1.4
+    # via cookiecutter
+markdown-it-py==3.0.0
+    # via rich
+markupsafe==2.1.5
+    # via jinja2
+mdurl==0.1.2
+    # via markdown-it-py
 nodeenv==1.9.1
     # via pre-commit
 packaging==24.1
@@ -33,13 +71,36 @@ platformdirs==4.2.2
 pluggy==1.5.0
     # via pytest
 pre-commit==3.8.0
+psycopg2-binary==2.9.9
+pygments==2.18.0
+    # via rich
 pytest==8.3.2
-pyyaml==6.0.1
+python-dateutil==2.9.0.post0
+    # via arrow
+python-dotenv==1.0.1
+python-slugify==8.0.4
+    # via cookiecutter
+pyyaml==6.0.2
+    # via cookiecutter
     # via pre-commit
-ruff==0.5.6
+requests==2.32.3
+    # via cookiecutter
+rich==13.7.1
+    # via cookiecutter
+ruff==0.5.7
+six==1.16.0
+    # via python-dateutil
 sqlparse==0.5.1
     # via django
+    # via django-debug-toolbar
+text-unidecode==1.3
+    # via python-slugify
+types-python-dateutil==2.9.0.20240316
+    # via arrow
 tzdata==2024.1
     # via django
+urllib3==2.2.2
+    # via requests
 virtualenv==20.26.3
     # via pre-commit
+whitenoise==6.7.0

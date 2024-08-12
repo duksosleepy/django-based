@@ -11,8 +11,26 @@
 
 asgiref==3.8.1
     # via django
-django==5.0.7
+    # via django-browser-reload
+crispy-bootstrap5==2024.2
+django==5.1
+    # via crispy-bootstrap5
+    # via django-allauth
+    # via django-browser-reload
+    # via django-crispy-forms
+    # via django-debug-toolbar
+    # via django-tailwind
+django-allauth==64.0.0
+django-browser-reload==1.13.0
+django-crispy-forms==2.3
+    # via crispy-bootstrap5
+django-debug-toolbar==4.4.6
+django-tailwind==3.8.0
+psycopg2-binary==2.9.9
+python-dotenv==1.0.1
 sqlparse==0.5.1
     # via django
+    # via django-debug-toolbar
 tzdata==2024.1
     # via django
+whitenoise==6.7.0
