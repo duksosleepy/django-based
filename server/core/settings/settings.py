@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "apps.pages",
 ]
 
+TAILWIND_CSS_PATH = "pages/css/dist/styles.css"
 TAILWIND_APP_NAME = "theme"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
@@ -93,6 +94,7 @@ TEMPLATES = [
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
+                "django.template.context_processors.media",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],

@@ -2,7 +2,10 @@
 {% load static tailwind_tags %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" x-cloak x-data="{ theme: $persist('auto').as('theme') }" x-bind:class="{
+  'dark': theme === 'dark' ||
+  (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+}">
 
 <head>
   <meta charset="utf-8">
@@ -14,23 +17,21 @@
   <meta name="description" content="A framework for launching new Django projects quickly.">
   <meta name="author" content="">
   <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
-  <script src="https://unpkg.com/htmx.org@1.6.1"
-    integrity="sha384-tvG/2mnCFmGQzYC1Oh3qxQ7CkQ9kMzYjWZSNtrRZygHPDDqottzEJsqS4oUVodhW"
+  <script src="https://unpkg.com/htmx.org@1.6.1" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.14.1/dist/cdn.min.js"
     crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/alpinejs@3.7.1/dist/cdn.min.js"
-    defer
-    integrity="sha384-KLv/Yaw8nAj6OXX6AvVFEt1FNRHrfBHziZ2JzPhgO9OilYrn6JLfCR4dZzaaQCA5"
-    crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" crossorigin="anonymous"></script>
 
   {% tailwind_css %}
 
   {% block css %}
-    <link rel="stylesheet" href="{% static 'css/base.css' %}"  >
+  <link rel="stylesheet" href="{% static 'pages/css/base.css' %}">
   {% endblock %}
 </head>
 
-<body hx-headers="{'X-CSRFToken': '{{ csrf_token }}'}" hx-boost="true" hx-indicator=".progress" class="dark:bg-slate-900">
-  
+<body hx-headers="{'X-CSRFToken': '{{ csrf_token }}'}" hx-boost="true" hx-indicator=".progress"
+  class="dark:bg-slate-900">
+
   {% include '_header.html' %}
 
   <main id="mainContent">
@@ -39,8 +40,9 @@
 
 
   {% block javascript %}
-    <script src="{% static 'js/base.js' %}"></script>
+  <script src="{% static 'pages/js/base.js' %}"></script>
   {% endblock javascript %}
 </body>
 {% include '_footer.html' %}
+
 </html>

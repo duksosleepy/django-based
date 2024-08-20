@@ -1,10 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["templates/**/*.html"],
+  content: ["templates/*.html","templates/**/*.html","templates/**/**/*.html"],
   theme: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/forms'),
+  darkMode: "class",
+  plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/line-clamp'),],

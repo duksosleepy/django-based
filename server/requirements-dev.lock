@@ -12,14 +12,21 @@
 arrow==1.3.0
     # via cookiecutter
 asgiref==3.8.1
+    # via channels
     # via django
     # via django-browser-reload
+    # via django-htmx
 binaryornot==0.4.4
     # via cookiecutter
+brotli==1.1.0
+    # via whitenoise
 certifi==2024.7.4
     # via requests
+cffi==1.17.0
+    # via cryptography
 cfgv==3.4.0
     # via pre-commit
+channels==4.1.0
 chardet==5.2.0
     # via binaryornot
 charset-normalizer==3.3.2
@@ -31,23 +38,34 @@ colorama==0.4.6
     # via pytest
 cookiecutter==2.6.0
 crispy-bootstrap5==2024.2
+crispy-tailwind==1.0.3
+cryptography==43.0.0
+defusedxml==0.7.1
+    # via python3-openid
 distlib==0.3.8
     # via virtualenv
 django==5.1
+    # via channels
     # via crispy-bootstrap5
+    # via crispy-tailwind
     # via django-allauth
     # via django-browser-reload
     # via django-crispy-forms
     # via django-debug-toolbar
+    # via django-htmx
     # via django-tailwind
 django-allauth==64.0.0
 django-browser-reload==1.13.0
 django-crispy-forms==2.3
     # via crispy-bootstrap5
+    # via crispy-tailwind
 django-debug-toolbar==4.4.6
+django-htmx==1.19.0
 django-tailwind==3.8.0
+django-widget-tweaks==1.5.0
 filelock==3.15.4
     # via virtualenv
+gunicorn==23.0.0
 identify==2.6.0
     # via pre-commit
 idna==3.7
@@ -64,27 +82,38 @@ mdurl==0.1.2
     # via markdown-it-py
 nodeenv==1.9.1
     # via pre-commit
+oauthlib==3.2.2
+    # via requests-oauthlib
 packaging==24.1
+    # via gunicorn
     # via pytest
 platformdirs==4.2.2
     # via virtualenv
 pluggy==1.5.0
     # via pytest
 pre-commit==3.8.0
+psycopg==3.2.1
+psycopg-binary==3.2.1
 psycopg2-binary==2.9.9
+pycparser==2.22
+    # via cffi
 pygments==2.18.0
     # via rich
+pyjwt==2.9.0
 pytest==8.3.2
 python-dateutil==2.9.0.post0
     # via arrow
 python-dotenv==1.0.1
 python-slugify==8.0.4
     # via cookiecutter
+python3-openid==3.2.0
 pyyaml==6.0.2
     # via cookiecutter
     # via pre-commit
 requests==2.32.3
     # via cookiecutter
+    # via requests-oauthlib
+requests-oauthlib==2.0.0
 rich==13.7.1
     # via cookiecutter
 ruff==0.5.7
@@ -97,10 +126,14 @@ text-unidecode==1.3
     # via python-slugify
 types-python-dateutil==2.9.0.20240316
     # via arrow
+typing-extensions==4.12.2
+    # via psycopg
 tzdata==2024.1
     # via django
+    # via psycopg
 urllib3==2.2.2
     # via requests
 virtualenv==20.26.3
     # via pre-commit
 whitenoise==6.7.0
+    # via whitenoise
