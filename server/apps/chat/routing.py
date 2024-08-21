@@ -5,8 +5,8 @@ from . import consumers
 websocket_urlpatterns = [
     # other websocket URLs here
     path(
-        r"ws/chatgpt-demo/",
+        r"/ws/chatgpt/",
         consumers.ChatConsumer.as_asgi(),
-        name="chatgpt_demo",
+        name="chatgpt",
     ),
 ]

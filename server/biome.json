@@ -61,7 +61,10 @@
       "package.json",
       ".stylelintrc.json",
       ".eslintrc.json",
-      "jsconfig.json"
+      "jsconfig.json",
+      "templates/*.html",
+      "templates/**/*.html",
+      "templates/**/**/*.html"
     ],
     "ignore": [
       "node_modules",

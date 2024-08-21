@@ -53,10 +53,12 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "django_browser_reload",
     "widget_tweaks",
+    "channels",
     # Local
     "theme",
     "apps.users",
     "apps.pages",
+    "apps.chat",
 ]
 
 TAILWIND_CSS_PATH = "pages/css/dist/styles.css"

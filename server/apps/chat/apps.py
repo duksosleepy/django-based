@@ -1,7 +1,6 @@
 from django.apps import AppConfig
 
 
-class PegasusChatDemoConfig(AppConfig):
-    name = "pegasus_chat_demo"
-    label = "pegasus_chat_demo"
+class ChatConfig(AppConfig):
+    name = "apps.chat"
     default_auto_field = "django.db.models.BigAutoField"
