@@ -1,3 +1,610 @@
-<div
-  class="absolute top-0 z-[-2] h-screen w-screen bg-white bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]">
-</div>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset=" utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <title>DjangoS</title>
+  <meta name="description" content="A framework for launching new Django projects quickly.">
+  <meta name="author" content="">
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.14.1/dist/cdn.min.js"
+    crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" crossorigin="anonymous"></script>
+  <style>
+    [x-cloak] {
+      display: none !important;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+  <script>
+    const defaultTheme = tailwind.defaultTheme;
+    const colors = tailwind.colors;
+    const plugin = tailwind.plugin;
+
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", ...defaultTheme.fontFamily.sans],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div x-data="{ mobileSidebarOpen: false }">
+    <!-- Page Container -->
+    <div id="page-container" class="relative mx-auto flex min-h-screen min-w-[320px] flex-col bg-white lg:ms-96">
+      <!-- Page Sidebar -->
+      <nav id="page-sidebar"
+        class="fixed bottom-0 start-0 top-0 z-50 flex h-full w-full border-zinc-200/75 bg-zinc-50 transition-transform duration-500 ease-out sm:w-96 lg:translate-x-0 lg:shadow-none ltr:border-r ltr:lg:translate-x-0 rtl:border-l rtl:lg:translate-x-0"
+        x-bind:class="{
+          'ltr:-translate-x-full rtl:translate-x-full': !mobileSidebarOpen,
+          'translate-x-0 shadow-lg': mobileSidebarOpen,
+        }" aria-label="Main Sidebar Navigation" x-cloak>
+        <!-- Mini Sidebar -->
+        <div class="w-14 flex-none border-zinc-200 bg-white ltr:border-r rtl:border-l">
+          <div class="flex h-20 items-center justify-center">
+            <!-- Brand -->
+            <a href="javascript:void(0)"
+              class="group inline-flex items-center rounded-full text-lg font-bold tracking-wide text-zinc-800 transition hover:opacity-75 active:opacity-100 lg:justify-center">
+              <svg
+                class="hi-mini hi-envelope-open inline-block h-5 w-5 -rotate-6 text-zinc-900 transition ease-out group-hover:rotate-0"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd"
+                  d="M2.106 6.447A2 2 0 001 8.237V16a2 2 0 002 2h14a2 2 0 002-2V8.236a2 2 0 00-1.106-1.789l-7-3.5a2 2 0 00-1.788 0l-7 3.5zm1.48 4.007a.75.75 0 00-.671 1.342l5.855 2.928a2.75 2.75 0 002.46 0l5.852-2.926a.75.75 0 10-.67-1.342l-5.853 2.926a1.25 1.25 0 01-1.118 0l-5.856-2.928z"
+                  clip-rule="evenodd" />
+              </svg>
+            </a>
+            <!-- END Brand -->
+          </div>
+          <nav class="space-y-2 p-2">
+            <a href="javascript:void(0)"
+              class="flex items-center justify-center rounded bg-zinc-100 py-2 text-zinc-900">
+              <svg class="hi-mini hi-inbox inline-block h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd"
+                  d="M1 11.27c0-.246.033-.492.099-.73l1.523-5.521A2.75 2.75 0 015.273 3h9.454a2.75 2.75 0 012.651 2.019l1.523 5.52c.066.239.099.485.099.732V15a2 2 0 01-2 2H3a2 2 0 01-2-2v-3.73zm3.068-5.852A1.25 1.25 0 015.273 4.5h9.454a1.25 1.25 0 011.205.918l1.523 5.52c.006.02.01.041.015.062H14a1 1 0 00-.86.49l-.606 1.02a1 1 0 01-.86.49H8.236a1 1 0 01-.894-.553l-.448-.894A1 1 0 006 11H2.53l.015-.062 1.523-5.52z"
+                  clip-rule="evenodd" />
+              </svg>
+            </a>
+            <a href="javascript:void(0)"
+              class="flex items-center justify-center rounded py-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900">
+              <svg class="hi-mini hi-star inline-block h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd"
+                  d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                  clip-rule="evenodd" />
+              </svg>
+            </a>
+            <a href="javascript:void(0)"
+              class="flex items-center justify-center rounded py-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900">
+              <svg class="hi-mini hi-clock inline-block h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z"
+                  clip-rule="evenodd" />
+              </svg>
+            </a>
+            <a href="javascript:void(0)"
+              class="flex items-center justify-center rounded py-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900">
+              <svg class="hi-mini hi-paper-airplane inline-block h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.925A1.5 1.5 0 005.135 9.25h6.115a.75.75 0 010 1.5H5.135a1.5 1.5 0 00-1.442 1.086l-1.414 4.926a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" />
+              </svg>
+            </a>
+            <a href="javascript:void(0)"
+              class="flex items-center justify-center rounded py-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900">
+              <svg class="hi-mini hi-archive-box inline-block h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M2 3a1 1 0 00-1 1v1a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1H2z" />
+                <path fill-rule="evenodd"
+                  d="M2 7.5h16l-.811 7.71a2 2 0 01-1.99 1.79H4.802a2 2 0 01-1.99-1.79L2 7.5zM7 11a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1z"
+                  clip-rule="evenodd" />
+              </svg>
+            </a>
+          </nav>
+        </div>
+        <!-- END Mini Sidebar -->
+
+        <!-- Sidebar Content -->
+        <div class="grow overflow-auto">
+          <!-- Sidebar Header -->
+          <div class="flex items-start justify-between border-b border-dashed border-zinc-200 px-5 py-4">
+            <!-- Heading -->
+            <div class="grow">
+              <h1 class="mb-0.5 text-2xl font-semibold">Inbox</h1>
+              <h2 class="mb-2 text-sm text-zinc-500">
+                You have <span class="font-semibold">1 new message</span>
+              </h2>
+              <div>
+                <input type="text" id="search" name="search"
+                  class="w-full rounded-lg border-zinc-200 bg-white text-sm focus:border-zinc-400/75 focus:ring focus:ring-zinc-300/30"
+                  placeholder="Search.." />
+              </div>
+            </div>
+            <!-- END Heading -->
+
+            <!-- Close Sidebar on Mobile -->
+            <div class="lg:hidden">
+              <button type="button"
+                class="group -me-2 inline-flex items-center gap-1.5 rounded px-2.5 py-2 text-sm font-medium transition hover:bg-zinc-200/75 active:bg-zinc-100 active:text-zinc-700"
+                x-on:click="mobileSidebarOpen = false">
+                <svg class="hi-solid hi-x inline-block h-5 w-5 text-zinc-700 group-hover:text-rose-600"
+                  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
+            <!-- END Close Sidebar on Mobile -->
+          </div>
+          <!-- END Sidebar Header -->
+
+          <!-- Main Navigation -->
+          <div class="grow divide-y divide-dashed divide-zinc-200">
+            <a href="javascript:void(0)" class="flex gap-3 p-4 hover:bg-white active:bg-transparent">
+              <div class="relative flex-none">
+                <img
+                  src="https://images.unsplash.com/photo-1528892952291-009c663ce843?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY2ODc1OTQ0OQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                  alt="User Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
+              </div>
+              <div class="grow">
+                <div class="flex items-center justify-between">
+                  <p class="mb-1.5 line-clamp-1 text-sm font-medium">
+                    Alan Wake
+                  </p>
+                  <div class="flex-none self-start">
+                    <p class="text-xs font-medium text-zinc-400">
+                      <span class="text-green-500">&bullet;</span>
+                      Now
+                    </p>
+                  </div>
+                </div>
+                <h3 class="mb-1 line-clamp-1 text-sm font-semibold">
+                  Inspiring Results
+                </h3>
+                <p class="line-clamp-2 text-xs font-medium text-zinc-500">
+                  Hi John, let's celebrate our achievements together. Join us
+                  for a team gathering filled with camaraderie and
+                  appreciation.
+                </p>
+              </div>
+            </a>
+            <a href="javascript:void(0)" class="flex gap-3 bg-white p-4">
+              <div class="relative flex-none">
+                <img
+                  src="https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                  alt="User Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
+              </div>
+              <div class="grow">
+                <div class="flex items-center justify-between">
+                  <p class="mb-1.5 line-clamp-1 text-sm font-medium">
+                    John Smith
+                  </p>
+                  <div class="flex-none self-start">
+                    <p class="text-xs font-medium text-zinc-400">Now</p>
+                  </div>
+                </div>
+                <h3 class="mb-1 text-sm font-semibold">
+                  <span>Design Report</span>
+                  <svg class="hi-mini hi-paper-clip inline-block h-4 w-4 text-zinc-500"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                      d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </h3>
+                <p class="line-clamp-2 text-xs font-medium text-zinc-500">
+                  Hello John, I just wanted to let you know that we have a
+                  look into the design and have our report ready..
+                </p>
+              </div>
+            </a>
+            <a href="javascript:void(0)" class="flex gap-3 p-4 hover:bg-white active:bg-transparent">
+              <div class="relative flex-none">
+                <img
+                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY2ODc2OTg2MQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                  alt="User Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
+              </div>
+              <div class="grow">
+                <div class="flex items-center justify-between">
+                  <p class="mb-1.5 line-clamp-1 text-sm font-medium">
+                    Anna Lee
+                  </p>
+                  <div class="flex-none self-start">
+                    <p class="text-xs font-medium text-zinc-400">2 min ago</p>
+                  </div>
+                </div>
+                <h3 class="mb-1 text-sm font-semibold">
+                  Exclusive dashboard preview
+                </h3>
+                <p class="line-clamp-2 text-xs font-medium text-zinc-500">
+                  Hi John you're invited to an exclusive preview of our
+                  client's new website. Join us and provide valuable feedback
+                </p>
+              </div>
+            </a>
+            <a href="javascript:void(0)" class="flex gap-3 p-4 hover:bg-white active:bg-transparent">
+              <div class="relative flex-none">
+                <img
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                  alt="User Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
+              </div>
+              <div class="grow">
+                <div class="flex items-center justify-between">
+                  <p class="mb-1.5 line-clamp-1 text-sm font-medium">
+                    Kate Lynne
+                  </p>
+                  <div class="flex-none self-start">
+                    <p class="text-xs font-medium text-zinc-400">
+                      5 hours ago
+                    </p>
+                  </div>
+                </div>
+                <h3 class="mb-1 text-sm font-semibold">
+                  Limited Resources Alert
+                </h3>
+                <p class="line-clamp-2 text-xs font-medium text-zinc-500">
+                  Hi John, our project is experiencing resource constraints.
+                  Let's work together to optimize its performance and
+                  efficiency.
+                </p>
+              </div>
+            </a>
+            <a href="javascript:void(0)" class="flex gap-3 p-4 hover:bg-white active:bg-transparent">
+              <div class="relative flex-none">
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                  alt="User Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
+              </div>
+              <div class="grow">
+                <div class="flex items-center justify-between">
+                  <p class="mb-1.5 line-clamp-1 text-sm font-medium">
+                    Mike Scott
+                  </p>
+                  <div class="flex-none self-start">
+                    <p class="text-xs font-medium text-zinc-400">
+                      2 hours ago
+                    </p>
+                  </div>
+                </div>
+                <h3 class="mb-1 text-sm font-semibold">Get Inspired</h3>
+                <p class="line-clamp-2 text-xs font-medium text-zinc-500">
+                  Hello John, seeking inspiration for our projects? Check out
+                  our blog post on responsive design for expert insights.
+                </p>
+              </div>
+            </a>
+            <a href="javascript:void(0)" class="flex gap-3 p-4 hover:bg-white active:bg-transparent">
+              <div class="relative flex-none">
+                <img
+                  src="https://images.unsplash.com/photo-1514846326710-096e4a8035e0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY2MjYzODYzMg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                  alt="User Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
+              </div>
+              <div class="grow">
+                <div class="flex items-center justify-between">
+                  <p class="mb-1.5 line-clamp-1 text-sm font-medium">
+                    Sue Keller
+                  </p>
+                  <div class="flex-none self-start">
+                    <p class="text-xs font-medium text-zinc-400">1 day ago</p>
+                  </div>
+                </div>
+                <h3 class="mb-1 text-sm font-semibold">
+                  Unlock New Features
+                </h3>
+                <p class="line-clamp-2 text-xs font-medium text-zinc-500">
+                  Hello Team, expand your skillset by joining our webinar on
+                  the newest frameworks. Unlock innovative features for our
+                  projects!
+                </p>
+              </div>
+            </a>
+            <div class="p-3 text-center">
+              <button type="button"
+                class="active:text-zinc-00 group inline-flex items-center gap-0.5 rounded bg-zinc-50 px-2 py-1.5 text-sm font-medium hover:bg-zinc-200/50 active:bg-transparent">
+                <svg class="hi-mini hi-arrow-small-down inline-block h-5 w-5 text-zinc-500 group-hover:text-indigo-600"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M10 5a.75.75 0 01.75.75v6.638l1.96-2.158a.75.75 0 111.08 1.04l-3.25 3.5a.75.75 0 01-1.08 0l-3.25-3.5a.75.75 0 111.08-1.04l1.96 2.158V5.75A.75.75 0 0110 5z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span>Load more..</span>
+              </button>
+            </div>
+          </div>
+          <!-- END Main Navigation -->
+        </div>
+        <!-- END Sidebar Content -->
+      </nav>
+      <!-- Page Sidebar -->
+
+      <!-- Page Header -->
+      <header id="page-header"
+        class="fixed end-0 start-0 top-0 z-30 flex h-20 flex-none items-center bg-white/80 shadow-sm backdrop-blur-sm lg:start-80 lg:hidden">
+        <div class="container mx-auto flex justify-between px-4 lg:px-8 xl:max-w-7xl">
+          <!-- Left Section -->
+          <div class="flex items-center gap-2">
+            <!-- Brand -->
+            <a href="javascript:void(0)"
+              class="group inline-flex items-center gap-2 text-lg font-bold tracking-wide text-zinc-800 transition hover:opacity-75 active:opacity-100">
+              <svg
+                class="hi-mini hi-envelope-open inline-block h-5 w-5 -rotate-6 text-zinc-900 transition ease-out group-hover:rotate-0"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd"
+                  d="M2.106 6.447A2 2 0 001 8.237V16a2 2 0 002 2h14a2 2 0 002-2V8.236a2 2 0 00-1.106-1.789l-7-3.5a2 2 0 00-1.788 0l-7 3.5zm1.48 4.007a.75.75 0 00-.671 1.342l5.855 2.928a2.75 2.75 0 002.46 0l5.852-2.926a.75.75 0 10-.67-1.342l-5.853 2.926a1.25 1.25 0 01-1.118 0l-5.856-2.928z"
+                  clip-rule="evenodd" />
+              </svg>
+              <span>Tail<span class="font-medium text-zinc-500">Box</span></span>
+            </a>
+            <!-- END Brand -->
+          </div>
+          <!-- END Left Section -->
+
+          <!-- Right Section -->
+          <div class="flex items-center gap-2">
+            <!-- Toggle Sidebar on Mobile -->
+            <button type="button"
+              class="group inline-flex items-center gap-1.5 rounded bg-zinc-100 px-2.5 py-2 text-sm font-medium hover:bg-zinc-200/75 active:bg-zinc-100 active:text-zinc-700"
+              x-on:click="mobileSidebarOpen = true">
+              <svg class="hi-solid hi-menu-alt-1 inline-block h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd" />
+              </svg>
+            </button>
+            <!-- END Toggle Sidebar on Mobile -->
+          </div>
+          <!-- END Right Section -->
+        </div>
+      </header>
+      <!-- END Page Header -->
+
+      <!-- Page Content -->
+      <main id="page-content" class="grow bg-zinc-100 pt-20 lg:pt-0">
+        <div class="container mx-auto px-4 py-4 lg:p-8 xl:max-w-4xl">
+          <!-- Actions -->
+          <div
+            class="sticky top-20 z-20 flex gap-4 rounded-t border-b border-dashed border-zinc-200 bg-white/80 p-4 backdrop-blur-sm lg:-top-0.5">
+            <div class="flex gap-1">
+              <button type="button"
+                class="group inline-flex items-center gap-1.5 rounded bg-zinc-100 px-2.5 py-2 text-sm font-medium hover:bg-zinc-200/75 active:bg-zinc-100 active:text-zinc-700">
+                <svg
+                  class="hi-mini hi-archive-box-arrow-down inline-block h-5 w-5 text-zinc-700 group-hover:text-indigo-600 xl:text-zinc-400"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M2 3a1 1 0 00-1 1v1a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1H2zm0 4.5h16l-.811 7.71a2 2 0 01-1.99 1.79H4.802a2 2 0 01-1.99-1.79L2 7.5zM10 9a.75.75 0 01.75.75v2.546l.943-1.048a.75.75 0 111.114 1.004l-2.25 2.5a.75.75 0 01-1.114 0l-2.25-2.5a.75.75 0 111.114-1.004l.943 1.048V9.75A.75.75 0 0110 9z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span class="hidden xl:inline-block">Archive</span>
+              </button>
+              <button type="button"
+                class="group inline-flex items-center gap-1.5 rounded bg-zinc-100 px-2.5 py-2 text-sm font-medium hover:bg-zinc-200/75 active:bg-zinc-100 active:text-zinc-700">
+                <svg
+                  class="hi-mini hi-trash group-hover inline-block h-5 w-5 text-zinc-700 group-hover:text-rose-600 xl:text-zinc-400"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span class="hidden xl:inline-block">Delete</span>
+              </button>
+            </div>
+            <div class="flex gap-1">
+              <button type="button"
+                class="group inline-flex items-center gap-1.5 rounded bg-zinc-100 px-2.5 py-2 text-sm font-medium hover:bg-zinc-200/75 active:bg-zinc-100 active:text-zinc-700">
+                <svg
+                  class="bi bi-reply-fill inline-block h-5 w-5 text-zinc-700 group-hover:text-zinc-600 xl:text-zinc-400"
+                  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+                </svg>
+                <span class="hidden xl:inline-block">Reply</span>
+              </button>
+              <button type="button"
+                class="group inline-flex items-center gap-1.5 rounded bg-zinc-100 px-2.5 py-2 text-sm font-medium hover:bg-zinc-200/75 active:bg-zinc-100 active:text-zinc-700">
+                <svg
+                  class="bi bi-reply-all-fill inline-block h-5 w-5 text-zinc-700 group-hover:text-zinc-600 xl:text-zinc-400"
+                  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    d="M8.021 11.9 3.453 8.62a.719.719 0 0 1 0-1.238L8.021 4.1a.716.716 0 0 1 1.079.619V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+                  <path
+                    d="M5.232 4.293a.5.5 0 0 1-.106.7L1.114 7.945a.5.5 0 0 1-.042.028.147.147 0 0 0 0 .252.503.503 0 0 1 .042.028l4.012 2.954a.5.5 0 1 1-.593.805L.539 9.073a1.147 1.147 0 0 1 0-1.946l3.994-2.94a.5.5 0 0 1 .699.106z" />
+                </svg>
+                <span class="hidden xl:inline-block">Reply to all</span>
+              </button>
+              <button type="button"
+                class="group inline-flex items-center gap-1.5 rounded bg-zinc-100 px-2.5 py-2 text-sm font-medium hover:bg-zinc-200/75 active:bg-zinc-100 active:text-zinc-700">
+                <svg
+                  class="bi bi-forward-fill inline-block h-5 w-5 text-zinc-700 group-hover:text-zinc-600 xl:text-zinc-400"
+                  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    d="m9.77 12.11 4.012-2.953a.647.647 0 0 0 0-1.114L9.771 5.09a.644.644 0 0 0-.971.557V6.65H2v3.9h6.8v1.003c0 .505.545.808.97.557z" />
+                </svg>
+                <span class="hidden xl:inline-block">Forward</span>
+              </button>
+            </div>
+            <div class="flex gap-1">
+              <button type="button"
+                class="group inline-flex items-center gap-1.5 rounded bg-zinc-100 px-2.5 py-2 text-sm font-medium hover:bg-zinc-200/75 active:bg-zinc-100 active:text-zinc-700">
+                <svg
+                  class="hi-mini hi-star inline-block h-5 w-5 text-zinc-700 group-hover:text-orange-500 xl:text-zinc-400"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span class="hidden xl:inline-block">Star</span>
+              </button>
+            </div>
+          </div>
+          <!-- END Actions -->
+
+          <!-- Message -->
+          <div class="mb-2 rounded-b bg-white">
+            <div class="flex gap-4 px-6 py-4 md:px-10 md:py-8">
+              <div class="relative flex-none">
+                <img
+                  src="https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                  alt="User Avatar" class="h-12 w-12 rounded-full border-2 border-white/50" />
+              </div>
+              <div class="grow">
+                <div class="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
+                  <div class="grow">
+                    <p class="line-clamp-1 font-semibold">John Smith</p>
+                    <p class="line-clamp-1 text-sm font-medium text-zinc-500">
+                      j.smith@example.com
+                    </p>
+                  </div>
+                  <div class="flex-none">
+                    <p class="text-xs font-medium leading-relaxed text-zinc-500">
+                      June 12, 2023 - 12:30
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h3 class="border-y border-dashed border-zinc-200 px-6 py-3 text-lg font-bold md:px-10">
+              <span>Design Report</span>
+              <svg class="hi-mini hi-paper-clip inline-block h-5 w-5 text-zinc-500" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd"
+                  d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
+                  clip-rule="evenodd" />
+              </svg>
+            </h3>
+            <div class="prose prose-sm max-w-none p-6 md:p-10">
+              <p>Hello John,</p>
+              <p>
+                I hope this email finds you well. I wanted to update you on
+                the progress of our web development project. I'm pleased to
+                inform you that our team has taken a thorough look into the
+                design, and we have prepared a comprehensive report for your
+                review.
+              </p>
+              <p>
+                The design review report encompasses various aspects,
+                including the visual aesthetics, user experience, and
+                functionality of the website. Our team has conducted a
+                detailed analysis to identify strengths, potential areas of
+                improvement, and actionable recommendations to ensure the
+                design aligns perfectly with your goals and requirements.
+              </p>
+              <p>
+                I understand how crucial your input is to the success of this
+                project. Therefore, I kindly request you to take some time to
+                carefully review the report. We value your expertise and
+                insights, and your feedback will play a pivotal role in
+                refining the design further.
+              </p>
+              <p>
+                Please find the attached design review report for your
+                convenience. Should you have any questions, concerns, or if
+                there's anything specific you would like us to focus on,
+                please don't hesitate to reach out. We are here to address any
+                queries and work collaboratively towards achieving the best
+                possible outcome.
+              </p>
+              <p>
+                Thank you for your time and attention to this matter. We
+                greatly appreciate your active involvement in the design
+                review process. We look forward to receiving your valuable
+                feedback, which will enable us to enhance the design and move
+                forward with the project.
+              </p>
+              <p>Best Regards,</p>
+              <p>
+                <strong>John Smith</strong><br />
+                Web Development Team
+              </p>
+
+              <!-- Attachments -->
+              <div class="flex items-start gap-3">
+                <button type="button"
+                  class="group inline-flex w-48 flex-col items-center gap-1 rounded-lg bg-zinc-100 px-2.5 py-4 text-sm transition hover:bg-zinc-200/75 active:bg-zinc-100 active:text-zinc-700">
+                  <svg
+                    class="hi-outline hi-document-chart-bar mb-2 inline-block h-12 w-12 text-zinc-500 group-hover:text-indigo-600"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25M9 16.5v.75m3-3v3M15 12v5.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                  <span class="font-semibold">website-design.fig</span>
+                  <span class="font-medium text-zinc-500">20.6MB</span>
+                </button>
+                <button type="button"
+                  class="group inline-flex w-48 flex-col items-center gap-1 rounded-lg bg-zinc-100 px-2.5 py-4 text-sm transition hover:bg-zinc-200/75 active:bg-zinc-100 active:text-zinc-700">
+                  <svg
+                    class="hi-outline hi-document-chart-bar mb-2 inline-block h-12 w-12 text-zinc-500 group-hover:text-indigo-600"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25M9 16.5v.75m3-3v3M15 12v5.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                  <span class="font-semibold">app-design.fig</span>
+                  <span class="font-medium text-zinc-500">16.77MB</span>
+                </button>
+              </div>
+              <!-- END Attachments -->
+            </div>
+          </div>
+          <!-- END Message -->
+
+          <!-- Post Comment Form -->
+          <div class="flex grow gap-4 rounded bg-white p-6 md:p-10">
+            <form onsubmit="return false;" class="w-full space-y-2">
+              <textarea id="comment" name="comment" rows="4" placeholder="Enter your reply.."
+                class="w-full rounded-lg border-zinc-200 bg-white text-sm focus:border-zinc-400/75 focus:ring focus:ring-zinc-300/30"></textarea>
+              <button type="submit"
+                class="inline-flex items-center justify-center gap-2 rounded-lg border border-zinc-700 bg-zinc-700 px-3 py-2 text-sm font-semibold leading-5 text-white hover:border-zinc-600 hover:bg-zinc-600 hover:text-white focus:ring focus:ring-zinc-400/50 active:border-zinc-700 active:bg-zinc-700">
+                <svg class="hi-mini hi-pencil inline-block h-4 w-4 opacity-50" xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path
+                    d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
+                </svg>
+                <span>Quick Reply</span>
+              </button>
+            </form>
+          </div>
+          <!-- END Post Comment Form -->
+        </div>
+      </main>
+      <!-- END Page Content -->
+
+      <!-- Page Footer -->
+      <footer id="page-footer" class="flex grow-0 items-center border-t border-dashed border-zinc-200/75 bg-zinc-100">
+        <div
+          class="container mx-auto flex flex-col gap-2 px-4 py-6 text-center text-sm font-medium text-zinc-600 md:flex-row md:justify-between md:gap-0 md:text-start lg:px-8 xl:max-w-7xl">
+          <div>© <span class="font-semibold">TailBox</span></div>
+          <div class="inline-flex items-center justify-center">
+            <span>Crafted with</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+              aria-hidden="true" class="mx-1 h-4 w-4 text-rose-500">
+              <path
+                d="M9.653 16.915l-.005-.003-.019-.01a20.759 20.759 0 01-1.162-.682 22.045 22.045 0 01-2.582-1.9C4.045 12.733 2 10.352 2 7.5a4.5 4.5 0 018-2.828A4.5 4.5 0 0118 7.5c0 2.852-2.044 5.233-3.885 6.82a22.049 22.049 0 01-3.744 2.582l-.019.01-.005.003h-.002a.739.739 0 01-.69.001l-.002-.001z">
+              </path>
+            </svg>
+            <span>by
+              <a class="font-medium text-zinc-900 hover:text-zinc-700" href="https://pixelcave.com"
+                target="_blank">pixelcave</a></span>
+          </div>
+        </div>
+      </footer>
+      <!-- END Page Footer -->
+    </div>
+    <!-- END Page Container -->
+  </div>
+</body>
+
+</html>

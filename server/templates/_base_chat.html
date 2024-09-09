@@ -1,0 +1,93 @@
+<!doctype html>
+<!-- dir="rtl" for RTL support -->
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+  <title>{% block title %}Chat{% endblock title %}</title>
+
+  <!-- Inter web font from bunny.net (GDPR compliant) -->
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS Play CDN (mainly for development/testing purposes) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+
+  <!-- Tailwind CSS v3 Configuration -->
+  <script>
+    const defaultTheme = tailwind.defaultTheme;
+    const colors = tailwind.colors;
+    const plugin = tailwind.plugin;
+
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", ...defaultTheme.fontFamily.sans],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Alpine Core -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Alpine x-cloak style (https://alpinejs.dev/directives/cloak) -->
+  <style>
+    [x-cloak] {
+      display: none !important;
+    }
+  </style>
+  <script>
+    window.addEventListener('scroll', function () {
+      const contentWrapper = document.getElementById('content-wrapper');
+      const scrollY = window.scrollY;
+
+      // Adjust blur based on scroll position
+      if (scrollY > 100) {
+        contentWrapper.style.filter = `blur(${Math.min((scrollY - 100) / 50, 10)}px)`; // Max blur of 10px
+      } else {
+        contentWrapper.style.filter = 'none'; // No blur when above the threshold
+      }
+    });
+  </script>
+  <style>
+    /* Blurred content wrapper */
+    #content-wrapper {
+      position: relative;
+      z-index: 1;
+      transition: filter 0.3s ease;
+    }
+
+    /* Ensure sticky element remains on top */
+    .sticky {
+      z-index: 10;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+    }
+
+    .no-scrollbar {
+      scrollbar-width: none;
+      /* Firefox */
+      -ms-overflow-style: none;
+      /* IE and Edge */
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    Copy over your dashboard template
+    -->
+  {% block content %}{% endblock %}
+</body>
+
+</html>
