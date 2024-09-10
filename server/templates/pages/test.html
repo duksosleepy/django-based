@@ -33,7 +33,33 @@
       },
     };
   </script>
+  <style>
+    /* Blurred content wrapper */
+    #content-wrapper {
+      position: relative;
+      z-index: 1;
+      transition: filter 0.3s ease;
+    }
 
+    /* Ensure sticky element remains on top */
+    .sticky {
+      z-index: 10;
+    }
+
+
+    [x-cloak] {
+      display: none !important;
+    }
+
+    .scrollbar-hide {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link href="https://fonts.bunny.net/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet" />
@@ -584,27 +610,64 @@
       <!-- END Page Content -->
 
       <!-- Page Footer -->
-      <footer id="page-footer" class="flex grow-0 items-center border-t border-dashed border-zinc-200/75 bg-zinc-100">
+      <div
+        class="min-h-200 fixed grow-0 end-0 start-0 bottom-0 z-30 bg-gray-100 flex flex-col items-center justify-center shadow-sm transition-all duration-300 ease-out dark:bg-gray-900 lg:ps-96">
         <div
-          class="container mx-auto flex flex-col gap-2 px-4 py-6 text-center text-sm font-medium text-zinc-600 md:flex-row md:justify-between md:gap-0 md:text-start lg:px-8 xl:max-w-7xl">
-          <div>© <span class="font-semibold">TailBox</span></div>
-          <div class="inline-flex items-center justify-center">
-            <span>Crafted with</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-              aria-hidden="true" class="mx-1 h-4 w-4 text-rose-500">
-              <path
-                d="M9.653 16.915l-.005-.003-.019-.01a20.759 20.759 0 01-1.162-.682 22.045 22.045 0 01-2.582-1.9C4.045 12.733 2 10.352 2 7.5a4.5 4.5 0 018-2.828A4.5 4.5 0 0118 7.5c0 2.852-2.044 5.233-3.885 6.82a22.049 22.049 0 01-3.744 2.582l-.019.01-.005.003h-.002a.739.739 0 01-.69.001l-.002-.001z">
-              </path>
-            </svg>
-            <span>by
-              <a class="font-medium text-zinc-900 hover:text-zinc-700" href="https://pixelcave.com"
-                target="_blank">pixelcave</a></span>
-          </div>
+          class="container mx-auto flex w-full max-w-7xl justify-center px-4 lg:px-8 bg-white rounded-lg shadow-md p-6 flex-none flex-col flex-grow"
+          x-data="{
+                message: '',
+                adjustTextareaHeight() {
+                    this.$refs.textarea.style.height = 'auto';
+                    this.$refs.textarea.style.height = `${Math.min(this.$refs.textarea.scrollHeight, 90)}px`;
+                },
+                sendMessage() {
+                    if (this.message.trim()) {
+                        console.log(this.message);
+                        this.message = '';
+                        this.$refs.textarea.style.height = '40px';
+                    }
+                }
+             }">
+
+
+          <form class="relative mt-auto">
+            <label for="chat-input" class="sr-only">Search chats</label>
+            <div class="relative">
+              <textarea x-model="message" x-ref="textarea" @input="adjustTextareaHeight"
+                class="w-full resize-none overflow-y-auto border rounded-full p-2 pl-12 pr-12 min-h-[40px] max-h-[90px] scrollbar-hide shadow-xl hover:shadow-lg  shadow-gray-400/10 focus:shadow-lg focus:outline-0 focus:ring-blue-600 placeholder:text-gray-400 focus:border-gray-100"
+                placeholder="Type your message..." rows="1"></textarea>
+            </div>
+            <button type="submit"
+              class="absolute bottom-2 right-2 rounded-lg p-2 text-sm text-slate-500 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:text-base"
+              :disabled="!message.trim()" @click="sendMessage">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24"
+                stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M8 9h8"></path>
+                <path d="M8 13h5"></path>
+                <path d="M11.008 19.195l-3.008 1.805v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5">
+                </path>
+                <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                <path d="M20.2 20.2l1.8 1.8"></path>
+              </svg>
+              <span class="sr-only">Search chats</span>
+            </button>
+            <button type="button"
+              class="absolute bottom-2 left-2 rounded-lg p-2 text-sm text-slate-500 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:text-base">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5">
+                </path>
+              </svg>
+              <span class="sr-only">Attach file</span>
+            </button>
+          </form>
         </div>
-      </footer>
-      <!-- END Page Footer -->
+        <!-- END Page Footer -->
+      </div>
+      <!-- END Page Container -->
     </div>
-    <!-- END Page Container -->
-  </div>
 </body>
 
 </html>
