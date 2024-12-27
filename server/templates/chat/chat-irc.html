@@ -19,7 +19,7 @@
         'translate-x-0': mobileSidebarOpen,
         'ltr:lg:-translate-x-full rtl:lg:translate-x-full': !desktopSidebarOpen,
         'ltr:lg:translate-x-0 rtl:lg:translate-x-0': desktopSidebarOpen,
-      }" x-data="{ activeTab: 'chat' }" aria-label="Main Sidebar Navigation">
+      }" aria-label="Main Sidebar Navigation">
 
       <div class="w-14 flex-none border-zinc-200 bg-white ltr:border-r rtl:border-l">
         <div class="flex h-20 items-center justify-center">
@@ -37,9 +37,7 @@
           <!-- END Brand -->
         </div>
         <nav class="space-y-2 p-2">
-          <a href="javascript:void(0)"
-            :class="activeTab === 'chat' ? 'bg-zinc-100 text-zinc-900' : 'text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900'"
-            class="flex items-center justify-center rounded py-2" @click="activeTab = 'chat'">
+          <a href="javascript:void(0)" class="flex items-center justify-center rounded bg-zinc-100 py-2 text-zinc-900">
             <svg class="hi-mini hi-inbox inline-block h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
               fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd"
@@ -48,8 +46,7 @@
             </svg>
           </a>
           <a href="javascript:void(0)"
-            :class="activeTab === 'star' ? 'bg-zinc-100 text-zinc-900' : 'text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900'"
-            class="flex items-center justify-center rounded py-2" @click="activeTab = 'star'">
+            class="flex items-center justify-center rounded py-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900">
             <svg class="hi-mini hi-star inline-block h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
               fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd"
@@ -58,8 +55,7 @@
             </svg>
           </a>
           <a href="javascript:void(0)"
-            :class="activeTab === 'clock' ? 'bg-zinc-100 text-zinc-900' : 'text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900'"
-            class="flex items-center justify-center rounded py-2" @click="activeTab = 'clock'">
+            class="flex items-center justify-center rounded py-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900">
             <svg class="hi-mini hi-clock inline-block h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
               fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd"
@@ -68,8 +64,7 @@
             </svg>
           </a>
           <a href="javascript:void(0)"
-            :class="activeTab === 'plane' ? 'bg-zinc-100 text-zinc-900' : 'text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900'"
-            class="flex items-center justify-center rounded py-2" @click="activeTab = 'plane'">
+            class="flex items-center justify-center rounded py-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900">
             <svg class="hi-mini hi-paper-airplane inline-block h-5 w-5" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path
@@ -77,8 +72,7 @@
             </svg>
           </a>
           <a href="javascript:void(0)"
-            :class="activeTab === 'archive' ? 'bg-zinc-100 text-zinc-900' : 'text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900'"
-            class="flex items-center justify-center rounded py-2" @click="activeTab = 'archive'">
+            class="flex items-center justify-center rounded py-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900">
             <svg class="hi-mini hi-archive-box inline-block h-5 w-5" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path d="M2 3a1 1 0 00-1 1v1a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1H2z" />
@@ -91,17 +85,19 @@
       </div>
 
       <!-- Sidebar Header -->
-      <div x-show="activeTab === 'chat'" class="grow overflow-auto">
+      <div class="grow overflow-auto">
         <!-- Sidebar Header -->
         <div class="flex items-start justify-between border-b border-dashed border-zinc-200 px-5 py-4">
           <!-- Heading -->
           <div class="grow">
-            <h1 class="mb-0.5 text-2xl font-semibold">Chat</h1>
+            <h1 class="mb-0.5 text-2xl font-semibold">Inbox</h1>
+            <h2 class="mb-2 text-sm text-zinc-500">
+              You have <span class="font-semibold">1 new message</span>
+            </h2>
             <div>
-              <button type="button"
-                class="inline-flex w-full items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-950 hover:bg-neutral-900 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:shadow-outline focus:outline-none">
-                New chat
-              </button>
+              <input type="text" id="search" name="search"
+                class="w-full rounded-lg border-zinc-200 bg-white text-sm focus:border-zinc-400/75 focus:ring focus:ring-zinc-300/30"
+                placeholder="Search.." />
             </div>
           </div>
           <!-- END Heading -->
@@ -125,38 +121,24 @@
 
         <!-- Main Navigation -->
         <div class="grow divide-y divide-dashed divide-zinc-200">
-          <a href="javascript:void(0)" class="flex gap-3 p-5 hover:bg-white active:bg-transparent">
+          <a href="javascript:void(0)" class="flex gap-3 p-4 hover:bg-white active:bg-transparent">
+            <div class="relative flex-none">
+              <img
+                src="https://images.unsplash.com/photo-1528892952291-009c663ce843?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY2ODc1OTQ0OQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                alt="User Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
+            </div>
             <div class="grow">
               <div class="flex items-center justify-between">
                 <p class="mb-1.5 line-clamp-1 text-sm font-medium">
                   Alan Wake
                 </p>
                 <div class="flex-none self-start">
-                  <div x-data="{ open: false }" class="text-xs font-medium text-zinc-400">
-                    <span>Now</span>
-                    <button @click="open = !open" class="disabled:pointer-events-none disabled:opacity-50">
-                      <svg class="inline-block h-4 w-4 xmlns=" http://www.w3.org/2000/svg" fill="#000000"
-                        viewBox="0 0 256 256">
-                        <path
-                          d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM128,72a12,12,0,1,0-12-12A12,12,0,0,0,128,72Zm0,112a12,12,0,1,0,12,12A12,12,0,0,0,128,184Z">
-                        </path>
-                      </svg>
-                    </button>
-
-                    <!-- Popover Menu -->
-                    <ul x-show="open" @click.away="open = false" x-transition
-                      class="absolute z-10 min-w-[180px] mt-2 rounded-lg border border-slate-200 bg-white p-1.5 shadow-lg focus:outline-none">
-                      <li class="cursor-pointer text-slate-800 p-3 rounded-md hover:bg-slate-100 focus:bg-slate-100">
-                        Delete</li>
-                      <li class="cursor-pointer text-slate-800 p-3 rounded-md hover:bg-slate-100 focus:bg-slate-100">
-                        Share</li>
-                      <li class="cursor-pointer text-slate-800 p-3 rounded-md hover:bg-slate-100 focus:bg-slate-100">
-                        Archive</li>
-                    </ul>
-                  </div>
+                  <p class="text-xs font-medium text-zinc-400">
+                    <span class="text-green-500">&bullet;</span>
+                    Now
+                  </p>
                 </div>
               </div>
-
               <h3 class="mb-1 line-clamp-1 text-sm font-semibold">
                 Inspiring Results
               </h3>
@@ -167,45 +149,133 @@
               </p>
             </div>
           </a>
-          <a href="javascript:void(0)" class="flex gap-3 p-5 hover:bg-white active:bg-transparent">
+          <a href="javascript:void(0)" class="flex gap-3 bg-white p-4">
+            <div class="relative flex-none">
+              <img
+                src="https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                alt="User Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
+            </div>
             <div class="grow">
               <div class="flex items-center justify-between">
                 <p class="mb-1.5 line-clamp-1 text-sm font-medium">
-                  Alan Wake
+                  John Smith
                 </p>
                 <div class="flex-none self-start">
-                  <div x-data="{ open: false }" class="text-xs font-medium text-zinc-400">
-                    <span>Now</span>
-                    <button @click="open = !open" class="disabled:pointer-events-none disabled:opacity-50">
-                      <svg class="inline-block h-4 w-4 xmlns=" http://www.w3.org/2000/svg" fill="#000000"
-                        viewBox="0 0 256 256">
-                        <path
-                          d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM128,72a12,12,0,1,0-12-12A12,12,0,0,0,128,72Zm0,112a12,12,0,1,0,12,12A12,12,0,0,0,128,184Z">
-                        </path>
-                      </svg>
-                    </button>
-
-                    <!-- Popover Menu -->
-                    <ul x-show="open" @click.away="open = false" x-transition
-                      class="absolute z-10 min-w-[180px] mt-2 rounded-lg border border-slate-200 bg-white p-1.5 shadow-lg focus:outline-none">
-                      <li class="cursor-pointer text-slate-800 p-3 rounded-md hover:bg-slate-100 focus:bg-slate-100">
-                        Delete</li>
-                      <li class="cursor-pointer text-slate-800 p-3 rounded-md hover:bg-slate-100 focus:bg-slate-100">
-                        Share</li>
-                      <li class="cursor-pointer text-slate-800 p-3 rounded-md hover:bg-slate-100 focus:bg-slate-100">
-                        Archive</li>
-                    </ul>
-                  </div>
+                  <p class="text-xs font-medium text-zinc-400">Now</p>
                 </div>
               </div>
-
-              <h3 class="mb-1 line-clamp-1 text-sm font-semibold">
-                Inspiring Results
+              <h3 class="mb-1 text-sm font-semibold">
+                <span>Design Report</span>
+                <svg class="hi-mini hi-paper-clip inline-block h-4 w-4 text-zinc-500" xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
+                    clip-rule="evenodd" />
+                </svg>
               </h3>
               <p class="line-clamp-2 text-xs font-medium text-zinc-500">
-                Hi John, let's celebrate our achievements together. Join us
-                for a team gathering filled with camaraderie and
-                appreciation.
+                Hello John, I just wanted to let you know that we have a
+                look into the design and have our report ready..
+              </p>
+            </div>
+          </a>
+          <a href="javascript:void(0)" class="flex gap-3 p-4 hover:bg-white active:bg-transparent">
+            <div class="relative flex-none">
+              <img
+                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY2ODc2OTg2MQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                alt="User Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
+            </div>
+            <div class="grow">
+              <div class="flex items-center justify-between">
+                <p class="mb-1.5 line-clamp-1 text-sm font-medium">
+                  Anna Lee
+                </p>
+                <div class="flex-none self-start">
+                  <p class="text-xs font-medium text-zinc-400">2 min ago</p>
+                </div>
+              </div>
+              <h3 class="mb-1 text-sm font-semibold">
+                Exclusive dashboard preview
+              </h3>
+              <p class="line-clamp-2 text-xs font-medium text-zinc-500">
+                Hi John you're invited to an exclusive preview of our
+                client's new website. Join us and provide valuable feedback
+              </p>
+            </div>
+          </a>
+          <a href="javascript:void(0)" class="flex gap-3 p-4 hover:bg-white active:bg-transparent">
+            <div class="relative flex-none">
+              <img
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                alt="User Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
+            </div>
+            <div class="grow">
+              <div class="flex items-center justify-between">
+                <p class="mb-1.5 line-clamp-1 text-sm font-medium">
+                  Kate Lynne
+                </p>
+                <div class="flex-none self-start">
+                  <p class="text-xs font-medium text-zinc-400">
+                    5 hours ago
+                  </p>
+                </div>
+              </div>
+              <h3 class="mb-1 text-sm font-semibold">
+                Limited Resources Alert
+              </h3>
+              <p class="line-clamp-2 text-xs font-medium text-zinc-500">
+                Hi John, our project is experiencing resource constraints.
+                Let's work together to optimize its performance and
+                efficiency.
+              </p>
+            </div>
+          </a>
+          <a href="javascript:void(0)" class="flex gap-3 p-4 hover:bg-white active:bg-transparent">
+            <div class="relative flex-none">
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                alt="User Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
+            </div>
+            <div class="grow">
+              <div class="flex items-center justify-between">
+                <p class="mb-1.5 line-clamp-1 text-sm font-medium">
+                  Mike Scott
+                </p>
+                <div class="flex-none self-start">
+                  <p class="text-xs font-medium text-zinc-400">
+                    2 hours ago
+                  </p>
+                </div>
+              </div>
+              <h3 class="mb-1 text-sm font-semibold">Get Inspired</h3>
+              <p class="line-clamp-2 text-xs font-medium text-zinc-500">
+                Hello John, seeking inspiration for our projects? Check out
+                our blog post on responsive design for expert insights.
+              </p>
+            </div>
+          </a>
+          <a href="javascript:void(0)" class="flex gap-3 p-4 hover:bg-white active:bg-transparent">
+            <div class="relative flex-none">
+              <img
+                src="https://images.unsplash.com/photo-1514846326710-096e4a8035e0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=160&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY2MjYzODYzMg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=160"
+                alt="User Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
+            </div>
+            <div class="grow">
+              <div class="flex items-center justify-between">
+                <p class="mb-1.5 line-clamp-1 text-sm font-medium">
+                  Sue Keller
+                </p>
+                <div class="flex-none self-start">
+                  <p class="text-xs font-medium text-zinc-400">1 day ago</p>
+                </div>
+              </div>
+              <h3 class="mb-1 text-sm font-semibold">
+                Unlock New Features
+              </h3>
+              <p class="line-clamp-2 text-xs font-medium text-zinc-500">
+                Hello Team, expand your skillset by joining our webinar on
+                the newest frameworks. Unlock innovative features for our
+                projects!
               </p>
             </div>
           </a>
@@ -225,134 +295,6 @@
         <!-- END Main Navigation -->
       </div>
       <!-- END Sidebar Navigation -->
-      <div x-show="activeTab === 'star'" class="grow overflow-auto">
-        <!-- Sidebar Header -->
-        <div class="flex items-start justify-between border-b border-dashed border-zinc-200 px-5 py-4">
-          <!-- Heading -->
-          <div class="grow">
-            <h1 class="mb-0.5 text-2xl font-semibold">Chat</h1>
-            <div>
-              <button type="button"
-                class="inline-flex w-full items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-950 hover:bg-neutral-900 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:shadow-outline focus:outline-none">
-                New chat
-              </button>
-            </div>
-          </div>
-          <!-- END Heading -->
-
-          <!-- Close Sidebar on Mobile -->
-          <div class="lg:hidden">
-            <button type="button"
-              class="group -me-2 inline-flex items-center gap-1.5 rounded px-2.5 py-2 text-sm font-medium transition hover:bg-zinc-200/75 active:bg-zinc-100 active:text-zinc-700"
-              x-on:click="mobileSidebarOpen = false">
-              <svg class="hi-solid hi-x inline-block h-5 w-5 text-zinc-700 group-hover:text-rose-600"
-                fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clip-rule="evenodd" />
-              </svg>
-            </button>
-          </div>
-          <!-- END Close Sidebar on Mobile -->
-        </div>
-        <!-- END Sidebar Header -->
-
-        <!-- Main Navigation -->
-        <div class="grow divide-y divide-dashed divide-zinc-200">
-          <div class="p-3">
-            <label for="api-key" class="block px-2 py-1.5 text-sm font-medium">API Key</label>
-
-            <input type="password" id="api-key"
-              class="block w-full rounded-lg p-2.5 text-xs bg-white border border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"
-              placeholder="4sNhFQ******ffyt" />
-
-          </div>
-          <div class="p-3">
-            <label for="api-key" class="block px-2 py-1.5 text-sm font-medium">Base URL</label>
-
-            <input type="url" id="base-url"
-              class="block w-full rounded-lg p-2.5 text-xs bg-white border border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"
-              placeholder="https://api.openai.com" />
-
-          </div>
-          <div class="p-3">
-            <label for="select-model" class="block px-2 py-1.5 text-sm font-medium">Model</label>
-            <select name="select-model" id="select-model"
-              class="block w-full items-center justify-between p-2.5 pl-3 pr-10 text-left bg-white border rounded-lg cursor-default border-neutral-200/70 focus:outline-none text-xs">
-              <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
-              <option value="gpt-4">gpt-4</option>
-              <option value="gpt-4-0314">gpt-4-0314</option>
-              <option value="gpt-4-32k">gpt-4-32k</option>
-              <option value="gpt-4-32k-0314">gpt-4-32k-0314</option>
-              <option value="gpt-3.5-turbo-0301">gpt-3.5-turbo-0301</option>
-            </select>
-          </div>
-          <div class="p-3">
-            <label for="max-tokens" class="block px-2 py-1.5 text-sm font-medium">Max tokens</label>
-
-
-            <input type="number" id="max-tokens"
-              oninput="document.getElementById('max-tokens-range').value = this.value"
-              class="block w-full rounded-lg p-2.5 text-xs bg-white border border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"
-              placeholder=50 />
-
-            <input type="range" id="max-tokens-range" min="0" max="100" value="50" step="any"
-              oninput="document.getElementById('max-tokens').value = this.value" class="w-full h-full appearance-none flex items-center cursor-pointer bg-transparent z-30
-            [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:appearance-none
-            [&::-moz-range-thumb]:bg-blue-600 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:w-2.5 [&::-moz-range-thumb]:h-2.5 [&::-moz-range-thumb]:appearance-none
-            [&::-ms-thumb]:bg-blue-600 [&::-ms-thumb]:rounded-full [&::-ms-thumb]:border-0 [&::-ms-thumb]:w-2.5 [&::-ms-thumb]:h-2.5 [&::-ms-thumb]:appearance-none
-            [&::-webkit-slider-runnable-track]:bg-neutral-200 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:overflow-hidden [&::-moz-range-track]:bg-neutral-200 [&::-moz-range-track]:rounded-full [&::-ms-track]:bg-neutral-200 [&::-ms-track]:rounded-full
-            [&::-moz-range-progress]:bg-blue-400 [&::-moz-range-progress]:rounded-full [&::-ms-fill-lower]:bg-blue-400 [&::-ms-fill-lower]:rounded-full [&::-webkit-slider-thumb]:shadow-[-999px_0px_0px_990px_#4e97ff]
-        ">
-          </div>
-          <div class="p-3">
-            <label for="max-topp" class="block px-2 py-1.5 text-sm font-medium">Top P</label>
-
-
-            <input type="number" id="max-topp" oninput="document.getElementById('max-topp-range').value = this.value"
-              class="block w-full rounded-lg p-2.5 text-xs bg-white border border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"
-              placeholder=50 />
-
-            <input type="range" id="max-topp-range" min="0" max="100" value="50" step="any"
-              oninput="document.getElementById('max-topp').value = this.value" class="w-full h-full appearance-none flex items-center cursor-pointer bg-transparent z-30
-            [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:appearance-none
-            [&::-moz-range-thumb]:bg-blue-600 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:w-2.5 [&::-moz-range-thumb]:h-2.5 [&::-moz-range-thumb]:appearance-none
-            [&::-ms-thumb]:bg-blue-600 [&::-ms-thumb]:rounded-full [&::-ms-thumb]:border-0 [&::-ms-thumb]:w-2.5 [&::-ms-thumb]:h-2.5 [&::-ms-thumb]:appearance-none
-            [&::-webkit-slider-runnable-track]:bg-neutral-200 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:overflow-hidden [&::-moz-range-track]:bg-neutral-200 [&::-moz-range-track]:rounded-full [&::-ms-track]:bg-neutral-200 [&::-ms-track]:rounded-full
-            [&::-moz-range-progress]:bg-blue-400 [&::-moz-range-progress]:rounded-full [&::-ms-fill-lower]:bg-blue-400 [&::-ms-fill-lower]:rounded-full [&::-webkit-slider-thumb]:shadow-[-999px_0px_0px_990px_#4e97ff]
-        ">
-          </div>
-          <div class="p-3">
-            <label for="max-temperature" class="block px-2 py-1.5 text-sm font-medium">Max temperature</label>
-
-
-            <input type="number" id="max-temperature"
-              oninput="document.getElementById('max-temperature-range').value = this.value"
-              class="block w-full rounded-lg p-2.5 text-xs bg-white border border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"
-              placeholder=50 />
-
-            <input type="range" id="max-temperature-range" min="0" max="100" value="50" step="any"
-              oninput="document.getElementById('max-temperature').value = this.value" class="w-full h-full appearance-none flex items-center cursor-pointer bg-transparent z-30
-            [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:appearance-none
-            [&::-moz-range-thumb]:bg-blue-600 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:w-2.5 [&::-moz-range-thumb]:h-2.5 [&::-moz-range-thumb]:appearance-none
-            [&::-ms-thumb]:bg-blue-600 [&::-ms-thumb]:rounded-full [&::-ms-thumb]:border-0 [&::-ms-thumb]:w-2.5 [&::-ms-thumb]:h-2.5 [&::-ms-thumb]:appearance-none
-            [&::-webkit-slider-runnable-track]:bg-neutral-200 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:overflow-hidden [&::-moz-range-track]:bg-neutral-200 [&::-moz-range-track]:rounded-full [&::-ms-track]:bg-neutral-200 [&::-ms-track]:rounded-full
-            [&::-moz-range-progress]:bg-blue-400 [&::-moz-range-progress]:rounded-full [&::-ms-fill-lower]:bg-blue-400 [&::-ms-fill-lower]:rounded-full [&::-webkit-slider-thumb]:shadow-[-999px_0px_0px_990px_#4e97ff]
-        ">
-          </div>
-          <div class="p-3 text-center">
-            <button type="button"
-              class="w-full active:text-zinc-00 group inline-flex items-center gap-0.5 rounded bg-zinc-50 px-2 py-1.5 text-sm font-medium hover:bg-zinc-200/50 active:bg-transparent">
-              <span>Save Change</span>
-            </button>
-          </div>
-        </div>
-        <!-- END Main Navigation -->
-      </div>
-
-
-
-
     </nav>
     <!-- Page Sidebar -->
 
@@ -1245,22 +1187,26 @@
 
 
       <form class="relative mt-auto w-full max-w-3xl items-center justify-center">
-        <label for="chat-input" class="sr-only">Message</label>
+        <label for="chat-input" class="sr-only">Search chats</label>
         <div class="relative">
           <textarea x-model="message" x-ref="textarea" @input="adjustTextareaHeight"
-            class="w-full resize-none overflow-y-auto border rounded-full p-2 pl-12 pr-12 min-h-[40px] max-h-[90px] scrollbar-hide shadow-xl hover:shadow-lg shadow-gray-400/10 focus:shadow-lg focus:outline-0 border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"
+            class="w-full resize-none overflow-y-auto border rounded-full p-2 pl-12 pr-12 min-h-[40px] max-h-[90px] scrollbar-hide shadow-xl hover:shadow-lg  shadow-gray-400/10 focus:shadow-lg focus:outline-0 focus:ring-blue-600 placeholder:text-gray-400 focus:border-gray-100"
             placeholder="Type your message..." rows="1"></textarea>
         </div>
         <button type="submit"
-          class="absolute bottom-2 right-2 rounded-lg p-2 text-sm text-slate-500 hover:text-gray-400 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:text-base"
+          class="absolute bottom-2 right-2 rounded-lg p-2 text-sm text-slate-500 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:text-base"
           :disabled="!message.trim()" @click="sendMessage">
-          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000"
-            viewBox="0 0 256 256">
-            <path
-              d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.92-96.05a16,16,0,0,0,.05-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.83Z">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24"
+            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M8 9h8"></path>
+            <path d="M8 13h5"></path>
+            <path d="M11.008 19.195l-3.008 1.805v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5">
             </path>
+            <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+            <path d="M20.2 20.2l1.8 1.8"></path>
           </svg>
-          <span class="sr-only">Message</span>
+          <span class="sr-only">Search chats</span>
         </button>
         <button type="button"
           class="absolute bottom-2 left-2 rounded-lg p-2 text-sm text-slate-500 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:text-base">

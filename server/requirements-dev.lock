@@ -136,4 +136,3 @@ urllib3==2.2.2
 virtualenv==20.26.3
     # via pre-commit
 whitenoise==6.7.0
-    # via whitenoise
